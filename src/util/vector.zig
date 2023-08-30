@@ -26,3 +26,7 @@ pub export fn length3(v: Vec3) f32 {
 pub export fn normalize3(v: Vec3) Vec3 {
     return vecMul3(v, 1 / length3(v));
 }
+
+pub export fn dot(v: Vec3, w: Vec3) f32 {
+    return v[0] * w[0] + v[1] * w[1] + v[2] * w[2];
+}

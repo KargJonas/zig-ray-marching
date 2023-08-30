@@ -4,16 +4,20 @@ const ray = @cImport({
 });
 
 const std = @import("std");
-const getBrightness = @import("./compute_brightness.zig").getBrightness;
+const getColor = @import("./compute_brightness.zig").getColor;
 const normalize3 = @import("./util/vector.zig").normalize3;
 
 // CONFIG //
 const camera_position = @Vector(3, f32){ 0.5, 0.5, 0 };
-const cell_size = 0.1;
-const focal_length = 0.04;
+const cell_size = 0.05;
+const focal_length = 1;
 const width = 700;
 const height = 500;
 // CONFIG END //
+
+// const neighborhood = [_]@Vector(2, f32) {
+
+// }
 
 pub fn main() void {
     // ray.InitWindow(canvas_size[0], canvas_size[1], "Zig Raymarching");
@@ -43,13 +47,14 @@ pub fn main() void {
                 };
 
                 const direction = normalize3(direction_raw);
-                const brightness = getBrightness(camera_position, direction);
+                const color = getColor(camera_position, direction);
 
                 const abs_pixel_x = (x + 1) / 2 * width;
                 const abs_pixel_y = (y + 1) / 2 * height;
 
                 // ray.DrawRectangle(@intFromFloat(abs_pixel_x), @intFromFloat(abs_pixel_y), cell_size * width, cell_size * height, .{ brightness, brightness, brightness, 255 });
-                ray.DrawRectangle(@intFromFloat(abs_pixel_x), @intFromFloat(abs_pixel_y), cell_size * width, cell_size * height, .{ brightness, brightness, brightness, 255 });
+                // ray.DrawRectangle(@intFromFloat(abs_pixel_x), @intFromFloat(abs_pixel_y), cell_size * width, cell_size * height, .{ brightness, brightness, brightness, 255 });
+                ray.DrawRectangle(@intFromFloat(abs_pixel_x), @intFromFloat(abs_pixel_y), cell_size * width, cell_size * height, .{ color[0], color[1], color[2], 255 });
             }
         }
     }
