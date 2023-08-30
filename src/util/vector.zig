@@ -30,3 +30,15 @@ pub export fn normalize3(v: Vec3) Vec3 {
 pub export fn dot(v: Vec3, w: Vec3) f32 {
     return v[0] * w[0] + v[1] * w[1] + v[2] * w[2];
 }
+
+fn fract(x: f32) f32 {
+    return x - @floor(x);
+}
+
+pub export fn fract3(v: Vec3) Vec3 {
+    return Vec3{
+        fract(v[0]),
+        fract(v[1]),
+        fract(v[2]),
+    };
+}

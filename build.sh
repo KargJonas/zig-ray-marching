@@ -6,3 +6,4 @@
 mkdir build
 cd build
 zig build-exe ../src/main.zig -lc -lraylib && ./main
+# zig build-exe ../src/main.zig -lc -lraylib
